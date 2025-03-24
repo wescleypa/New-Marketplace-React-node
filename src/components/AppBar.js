@@ -54,6 +54,15 @@ export default function AppAppBar({ goSearch, setLoading, setPage }) {
     goSearch(searchQuery);
   };
 
+  const goPage = (page) => {
+    setOpen(false);
+    setPage(page);
+  };
+
+  const goHome = () => {
+    setPage('home');
+  };
+
   return (
     <AppBar
       position="fixed"
@@ -69,8 +78,8 @@ export default function AppAppBar({ goSearch, setLoading, setPage }) {
         <StyledToolbar variant="dense" disableGutters>
           {/* Logo */}
           <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-            <Typography color='primary' sx={{ fontWeight: 700, fontSize: 14 }}>
-              Ofertarproduto.com
+            <Typography color='primary' sx={{ fontWeight: 700, fontSize: 14, cursor: 'pointer' }} onClick={() => goHome()}>
+              Ofertarproduto.com.br
             </Typography>
           </Box>
 
@@ -172,21 +181,14 @@ export default function AppAppBar({ goSearch, setLoading, setPage }) {
                 </IconButton>
               </Box>
 
-              <MenuItem>Features</MenuItem>
-              <MenuItem>Testimonials</MenuItem>
-              <MenuItem>Highlights</MenuItem>
-              <MenuItem>Pricing</MenuItem>
-              <MenuItem>FAQ</MenuItem>
-              <MenuItem>Blog</MenuItem>
-              <Divider sx={{ my: 3 }} />
               <MenuItem>
-                <Button color="primary" variant="contained" fullWidth>
-                  Sign up
+                <Button color="primary" variant="contained" fullWidth onClick={() => goPage('register')}>
+                  Cadastrar grátis
                 </Button>
               </MenuItem>
               <MenuItem>
-                <Button color="primary" variant="outlined" fullWidth>
-                  Sign in
+                <Button color="primary" variant="outlined" fullWidth onClick={() => goPage('login')}>
+                  Acessar minha conta
                 </Button>
               </MenuItem>
             </Box>

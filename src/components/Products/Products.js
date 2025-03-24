@@ -301,7 +301,7 @@ function Products({ goSearch, emitGoSearch, loading, setLoading, selected, setSe
           </Typography>
         )}
       </Grid>
-      {paging && Number(paging) > 0 && (
+      {!!paging && Number(paging) > 0 && (
         <Pagination count={paging} color="primary" onChange={(e) => changePage(e?.target?.innerText)} sx={{ mt: 4 }} />
       )}
     </Container>

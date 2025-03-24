@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Typography, Button, Grid, Card, CardContent, Rating, Chip, Dialog, IconButton, Skeleton, Badge, Box, Icon } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -9,7 +9,12 @@ import { ArrowBack } from '@mui/icons-material';
 
 const ProductPage = ({ product, setSelected, setPage }) => {
   const [selectedImage, setSelectedImage] = useState(null);
-  console.log('sel ', product);
+  const [color, setColor] = useState(null);
+
+  const handleColorChange = (color) => {
+    setColor(color);
+  };
+
   return (
     <Container id="product" sx={{ mt: 12 }}>
       <IconButton onClick={() => setSelected(null)}>
@@ -33,7 +38,7 @@ const ProductPage = ({ product, setSelected, setPage }) => {
             ) : (
               product.images.map((image, index) => (
                 <SwiperSlide key={index}>
-                  <Chip sx={{ ml: 4, position: 'absolute', right: 10, top: 10 }} label={product?.condicao && product?.condicao === 'new' ? 'Produto novo' : 'Produto novo'} color="primary" />
+                  <Chip sx={{ ml: 4, position: 'absolute', right: 10, top: 10 }} label={product?.title?.toString()?.toUpperCase()?.includes('NOVO') ? 'Produto novo' : 'Destaque'} color="primary" />
                   <img src={image} onClick={() => setSelectedImage(image)} alt={`Imagem ${index + 1}`} style={{ cursor: 'pointer', width: '100%', height: '100%', objectFit: 'contain', borderRadius: 10 }} />
                 </SwiperSlide>
               ))
@@ -71,27 +76,35 @@ const ProductPage = ({ product, setSelected, setPage }) => {
               {product?.colors?.length > 0 && (
                 <Grid container sx={{ display: 'flex', flexDirection: 'column', mt: 4 }}>
                   Cores disponíveis
-                  {product.colors.map((cor, index) => (
-                    <FormControlLabel
-                      key={index}
-                      control={<Checkbox defaultChecked={product?.colors?.length <= 1} />}
-                      label={cor|| 'Cor indisponível'} // Acessa o nome da cor
-                    />
-                  ))}
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                    {product.colors.map((cor, index) => (
+                      <FormControlLabel
+                        key={index}
+                        control={
+                          <Checkbox
+                            checked={color === cor}
+                            onChange={() => handleColorChange(cor)}
+                            name="color"
+                          />
+                        }
+                        label={cor || 'Cor indisponível'}
+                      />
+                    ))}
+                  </Box>
                 </Grid>
               )}
-              {product?.memory?.length > 0 && (
+              {/*product?.memory?.length > 0 && (
                 <Grid container sx={{ display: 'flex', flexDirection: 'column', mt: 4 }}>
                   Variações
                   {product.memory.map((cor, index) => (
                     <FormControlLabel
                       key={index}
                       control={<Checkbox defaultChecked={product?.memory?.length <= 1} />}
-                      label={cor|| 'Cor indisponível'} // Acessa o nome da cor
+                      label={cor|| 'Variação indisponível'}
                     />
                   ))}
                 </Grid>
-              )}
+              )*/}
             </Box>
           )}
 
@@ -217,7 +230,7 @@ const ProductPage = ({ product, setSelected, setPage }) => {
                           ))}
                         </div><br />
                         <Typography variant="body2">{review.comment}</Typography>
-                        <Typography sx={{fontSize: 10, mt: 2}}>Você não pode curtir este comentário porque sua conta tem menos de 3 meses.</Typography>
+                        <Typography sx={{ fontSize: 10, mt: 2 }}>Você não pode curtir este comentário porque sua conta tem menos de 3 meses.</Typography>
                       </CardContent>
                     </Card>
                   ))

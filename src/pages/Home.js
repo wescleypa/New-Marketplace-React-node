@@ -183,7 +183,7 @@ function BottomCart({ open, setOpen, setSelected, setPage, page }) {
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 4 }}>
           <Typography>{user?.cart?.length} itens selecionados</Typography>
           <Typography sx={{ ml: 'auto' }}>Total no carrinho: <b>{totalCarrinho()}</b></Typography>
-          <Button sx={{ ml: 'auto' }} color="primary" variant='contained' onClick={() => goCheckout()}>Ir para pagamento</Button>
+          <Button sx={{ ml: 'auto' }} color="primary" variant='contained' disabled={!user?.cart?.length} onClick={() => goCheckout()}>Ir para pagamento</Button>
         </Box>
         <Box
           sx={{
@@ -215,6 +215,9 @@ function BottomCart({ open, setOpen, setSelected, setPage, page }) {
               </CardActions>
             </Card>
           ))}
+          {!user?.cart?.length && (<>
+            Nenhum produto adicionado ao carrinho ainda.
+          </>)}
         </Box>
       </Drawer>
     </div>

@@ -39,7 +39,7 @@ export default function FAQ() {
           textAlign: { sm: 'left', md: 'center' },
         }}
       >
-        Frequently asked questions
+        Perguntas frequentes
       </Typography>
       <Box sx={{ width: '100%' }}>
         <Accordion
@@ -52,7 +52,7 @@ export default function FAQ() {
             id="panel1d-header"
           >
             <Typography component="span" variant="subtitle2">
-              How do I contact customer support if I have a question or issue?
+              Como entro em contato com o suporte ao cliente se tiver alguma dúvida ou problema?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -61,10 +61,9 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-              You can reach our customer support team by emailing&nbsp;
-              <Link href="mailto:support@email.com">support@email.com</Link>
-              &nbsp;or calling our toll-free number. We&apos;re here to assist you
-              promptly.
+              Nossos sistemas utilizam inteligência artificial que monitora 24 horas por dia qualquer erro ou inconsistência, corrigindo a maioria dos problemas automaticamente. No entanto, se você ainda precisar de ajuda ou tiver alguma dúvida, nossa equipe de suporte está disponível para auxiliar.
+              Você pode entrar em contato através do e-mail:&nbsp;<Link href="mailto:support@email.com">suporte@ofertarproduto.com.br</Link>&nbsp;
+              Responderemos o mais rápido possível para garantir a melhor experiência possível! 😊
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -78,7 +77,7 @@ export default function FAQ() {
             id="panel2d-header"
           >
             <Typography component="span" variant="subtitle2">
-              Can I return the product if it doesn&apos;t meet my expectations?
+              Posso devolver o produto se ele não atender às minhas expectativas?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -87,9 +86,8 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-              Absolutely! We offer a hassle-free return policy. If you&apos;re not
-              completely satisfied, you can return the product within [number of
-              days] days for a full refund or exchange.
+              Absolutamente! Oferecemos uma política de devolução sem complicações. Se você não estiver
+              completamente satisfeito, você pode devolver o produto dentro de 15 dias para um reembolso total ou troca.
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -103,7 +101,7 @@ export default function FAQ() {
             id="panel3d-header"
           >
             <Typography component="span" variant="subtitle2">
-              What makes your product stand out from others in the market?
+              O que faz nosso produto se destacar dos demais no mercado?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -112,9 +110,10 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-              Our product distinguishes itself through its adaptability, durability,
-              and innovative features. We prioritize user satisfaction and
-              continually strive to exceed expectations in every aspect.
+              Nosso produto se distingue por sua adaptabilidade, durabilidade,
+              e recursos inovadores. Priorizamos a satisfação do usuário e
+              nos esforçamos continuamente para exceder as expectativas em todos os aspectos.
+              Além claro de todo nosso estoque estar em promoção de inauguração.
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -128,7 +127,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="span" variant="subtitle2">
-              Is there a warranty on the product, and what does it cover?
+              Por que a loja está em promoção e o frete é grátis ?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -137,10 +136,10 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-              Yes, our product comes with a [length of warranty] warranty. It covers
-              defects in materials and workmanship. If you encounter any issues
-              covered by the warranty, please contact our customer support for
-              assistance.
+              Estamos em promoção especial de inauguração! 🎉 <br/>
+              Para celebrar nossa abertura, oferecemos descontos exclusivos e frete grátis em todos os pedidos por tempo limitado. É nossa forma de agradecer pela sua confiança e deixar sua experiência ainda mais especial.
+
+              Aproveite agora antes que acabe! ⏳😊
             </Typography>
           </AccordionDetails>
         </Accordion>
