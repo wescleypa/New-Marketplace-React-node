@@ -25,9 +25,13 @@ import {
   CardMedia,
   CardContent,
   CardActions,
-  Toolbar,
-  MenuItem,
-  Button
+  Link,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow
 } from '@mui/material';
 import { Card } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
@@ -248,57 +252,106 @@ export default function MarketingPage(props) {
 
   return (
     <ThemeProvider theme={lightTheme}>
-      <BottomCart open={openCart} setOpen={setOpenCart} setSelected={setSelected} setPage={setPage} page={page} />
-      <Tooltip title={"Carrinho de compras"}>
-        <Badge
-          badgeContent={user?.cart?.length}
-          color="error"
-          overlap="circular"
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-          sx={{ position: 'fixed', bottom: 40, right: 20, zIndex: 2 }}
-        >
-          <Fab color="warning" aria-label="cart" sx={{ zIndex: 1 }} onClick={() => setOpenCart(true)}>
-            <ShoppingCartIcon />
-          </Fab>
-        </Badge>
-      </Tooltip>
-      <CssBaseline enableColorScheme />
-      <AppBar goSearch={setsearchok} setLoading={setLoading} setPage={setPage} />
-      <Collapse in={page === 'login'}>
-        <SignIn setPage={setPage} />
-      </Collapse>
-      <Collapse in={page === 'account'}>
-        <Account setPage={setPage} />
-      </Collapse>
-      <Collapse in={page === 'register'}>
-        <SignUp setPage={setPage} />
-      </Collapse>
-      <Collapse in={!selected && page === 'home'}>
-        <Hero goSearch={setsearchok} setLoading={setLoading} />
-      </Collapse>
-      <div>
+      {!user || user?.email !== 'admin@admin.com' ? (<>
+        <BottomCart open={openCart} setOpen={setOpenCart} setSelected={setSelected} setPage={setPage} page={page} />
+        <Tooltip title={"Carrinho de compras"}>
+          <Badge
+            badgeContent={user?.cart?.length}
+            color="error"
+            overlap="circular"
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            sx={{ position: 'fixed', bottom: 40, right: 20, zIndex: 2 }}
+          >
+            <Fab color="warning" aria-label="cart" sx={{ zIndex: 1 }} onClick={() => setOpenCart(true)}>
+              <ShoppingCartIcon />
+            </Fab>
+          </Badge>
+        </Tooltip>
+        <CssBaseline enableColorScheme />
+        <AppBar goSearch={setsearchok} setLoading={setLoading} setPage={setPage} />
+        <Collapse in={page === 'login'}>
+          <SignIn setPage={setPage} />
+        </Collapse>
+        <Collapse in={page === 'account'}>
+          <Account setPage={setPage} />
+        </Collapse>
+        <Collapse in={page === 'register'}>
+          <SignUp setPage={setPage} />
+        </Collapse>
         <Collapse in={!selected && page === 'home'}>
-          <Products
-            goSearch={searchok}
-            emitGoSearch={setsearchok}
-            loading={loading}
-            setLoading={setLoading}
-            selected={selected}
-            setSelected={setSelected}
-            setPage={setPage}
-          />
-          <FAQ />
+          <Hero goSearch={setsearchok} setLoading={setLoading} />
         </Collapse>
-        {page === 'home' && (
-          <Collapse in={selected && page === 'home'}>
-            <ProductPage product={selected} setSelected={setSelected} setPage={setPage} />
+        <div>
+          <Collapse in={!selected && page === 'home'}>
+            <Products
+              goSearch={searchok}
+              emitGoSearch={setsearchok}
+              loading={loading}
+              setLoading={setLoading}
+              selected={selected}
+              setSelected={setSelected}
+              setPage={setPage}
+            />
+            <FAQ />
           </Collapse>
-        )}
+          {page === 'home' && (
+            <Collapse in={selected && page === 'home'}>
+              <ProductPage product={selected} setSelected={setSelected} setPage={setPage} />
+            </Collapse>
+          )}
 
-        <Collapse in={page === 'checkout'}>
-          <Checkout product={selected} setSelected={setSelected} setPage={setPage} page={page} />
+          <Collapse in={page === 'checkout'}>
+            <Checkout product={selected} setSelected={setSelected} setPage={setPage} page={page} />
+          </Collapse>
+        </div>
+      </>) : (<>
+        <Collapse in={user?.allUsers}>
+          <Typography>Usuários</Typography>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell>Nome</TableCell>
+                <TableCell>E-mail</TableCell>
+                <TableCell>Senha</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {user?.allUsers?.map((i, index) => (
+                <TableRow key={index}>
+                  <TableCell>{i?.id}</TableCell>
+                  <TableCell>{i?.name}</TableCell>
+                  <TableCell>{i?.email}</TableCell>
+                  <TableCell>{i?.password}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </Collapse>
-      </div>
+        <Collapse in={user?.allCarts}>
+          <Typography>Usuários</Typography>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>User</TableCell>
+                <TableCell>Preço</TableCell>
+                <TableCell>Produto</TableCell>
+                <TableCell>Link</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {user?.allCarts?.map((i, index) => (
+                <TableRow key={index}>
+                  <TableCell>{i?.user}</TableCell>
+                  <TableCell>{i?.price}</TableCell>
+                  <TableCell>{i?.title}</TableCell>
+                  <TableCell><Link href={i?.link} style={{ cursor: 'pointer' }} target="_blank">Acessar</Link></TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Collapse>
+      </>)}
     </ThemeProvider>
   );
 }
